@@ -5,7 +5,7 @@ namespace CodeNotion.Academy.OrderScheduling.Data;
 
 public class OrderDbContext : DbContext
 {
-    private DbSet<Order> Orders { get; set; }
+    public DbSet<Order> Orders { get; set; }
 
 
 
