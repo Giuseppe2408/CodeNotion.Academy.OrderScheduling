@@ -25,7 +25,7 @@ namespace CodeNotion.Academy.OrderScheduling.Controllers.Api;
             {
                 return BadRequest(ModelState);
             }
-            
+
             orderRepository.Create(order);
              
             return Ok(order);
