@@ -50,7 +50,7 @@ public class OrderController : ControllerBase
         }
 
         var order = _orderRepository.GetById(id);
-        _orderRepository.Update(order, data);
+        _orderRepository.Update(order ?? throw new InvalidOperationException(), data);
         return Ok(order);
     }
 
@@ -64,7 +64,7 @@ public class OrderController : ControllerBase
         }
 
         var order = _orderRepository.GetById(id);
-        _orderRepository.Delete(order);
+        _orderRepository.Delete(order ?? throw new InvalidOperationException());
         return Ok();
     }
 }

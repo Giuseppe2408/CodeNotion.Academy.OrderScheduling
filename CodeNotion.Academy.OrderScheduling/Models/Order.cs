@@ -3,10 +3,10 @@
 public class Order
 {
     public int Id { get; set; }
-    
-    public string Customer { get; set; }
-    
-    public string OrderNumber { get; set; }
+
+    public string Customer { get; set; } = null!;
+
+    public string OrderNumber { get; set; } = null!;
     
     public DateTime CuttingDate { get; set; }
     
