@@ -30,24 +30,24 @@ namespace CodeNotion.Academy.OrderScheduling.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Assembly_date")
+                    b.Property<DateTime>("AssemblyDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Bending_date")
+                    b.Property<DateTime>("BendingDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Customer")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Cutting_date")
+                    b.Property<DateTime>("CuttingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Order_number")
+                    b.Property<string>("OrderNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("Preparation_date")
+                    b.Property<DateTime>("PreparationDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
