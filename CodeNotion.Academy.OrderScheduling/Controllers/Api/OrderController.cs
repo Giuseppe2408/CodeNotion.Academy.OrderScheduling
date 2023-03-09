@@ -1,4 +1,6 @@
 ﻿using CodeNotion.Academy.OrderScheduling.Models;
+using CodeNotion.Academy.OrderScheduling.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CodeNotion.Academy.OrderScheduling.Controllers.Api;
@@ -8,10 +10,11 @@ namespace CodeNotion.Academy.OrderScheduling.Controllers.Api;
 public class OrderController : ControllerBase
 {
     private readonly IOrderRepository _orderRepository;
-
-    public OrderController(IOrderRepository orderRepository)
+    private readonly IMediator _mediator;
+    public OrderController(IOrderRepository orderRepository, IMediator mediator)
     {
         _orderRepository = orderRepository;
+        _mediator = mediator;
     }
 
     [HttpPost]
@@ -23,21 +26,25 @@ public class OrderController : ControllerBase
             return BadRequest(ModelState);
         }
 
+        
+        
+        
         _orderRepository.Create(order);
         return Ok(order);
     }
 
     [HttpGet]
     [Route("[action]")]
-    public IActionResult List()
+    public async Task<IActionResult> List()
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-
-        var orders = _orderRepository.All();
-        return Ok(orders);
+        var query = new GetAllOrderQuery();
+        var result =  await _mediator.Send(query);
+        
+        return Ok(result);
     }
 
     [HttpPut]

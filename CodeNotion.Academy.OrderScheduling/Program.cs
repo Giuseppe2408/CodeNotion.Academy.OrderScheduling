@@ -1,3 +1,4 @@
+using System.Reflection;
 using CodeNotion.Academy.OrderScheduling.Data;
 using CodeNotion.Academy.OrderScheduling.Models;
 
@@ -11,7 +12,8 @@ builder.Services.AddDbContext<OrderDbContext>();
 
 // add dependencies injection
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
-
+//add mediatr
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
