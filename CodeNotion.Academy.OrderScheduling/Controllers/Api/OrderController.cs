@@ -79,6 +79,7 @@ namespace CodeNotion.Academy.OrderScheduling.Controllers.Api;
             Order order = orderRepository.GetById(id);
             orderRepository.Delete(order);
             
+            
             return Ok();
             
         }
