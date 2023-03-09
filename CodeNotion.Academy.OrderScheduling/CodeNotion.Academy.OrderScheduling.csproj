@@ -28,8 +28,4 @@
       <Compile Remove="Controllers\Api\Create.cs" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="View" />
-    </ItemGroup>
-
 </Project>

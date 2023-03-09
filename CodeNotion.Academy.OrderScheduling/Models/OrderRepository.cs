@@ -1,78 +1,67 @@
 ﻿using System.Diagnostics;
 using CodeNotion.Academy.OrderScheduling.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace CodeNotion.Academy.OrderScheduling.Models;
+
 //repository per codice pulito
 public class OrderRepository : IOrderRepository
 {
-    private OrderDbContext db;
-    private Stopwatch sw = new Stopwatch();
+    private readonly OrderDbContext _db;
+    private readonly Stopwatch _sw = new();
 
-    public OrderRepository(OrderDbContext _db)
+    public OrderRepository(OrderDbContext db)
     {
-        db = _db;
+        _db = db;
     }
-    
+
     public List<Order> All()
     {
         StartTimer();
-            List<Order> orders = db.Orders.ToList();
+        var orders = _db.Orders.ToList();
         EndTimer();
         return orders;
-        
     }
-    
-    public Order GetById(int id)
-    {
-        return db.Orders.Where(or => or.Id == id).FirstOrDefault();
-        
-    }
+
+    public Order? GetById(int id) => _db.Orders.FirstOrDefault(or => or.Id == id);
 
     public void Create(Order order)
     {
         StartTimer();
-            db.Orders.Add(order);
-            db.SaveChanges();
+        _db.Orders.Add(order);
+        _db.SaveChanges();
         EndTimer();
     }
 
     public void Update(Order order, Order data)
     {
         StartTimer();
-            order.Customer = data.Customer;
-            order.Order_number = data.Order_number;
-            order.Cutting_date = data.Cutting_date;
-            order.Preparation_date = data.Preparation_date;
-            order.Bending_date = data.Bending_date;
-            order.Assembly_date = data.Assembly_date;
-        
-            db.SaveChanges();
-        EndTimer();    
+        order.Customer = data.Customer;
+        order.OrderNumber = data.OrderNumber;
+        order.CuttingDate = data.CuttingDate;
+        order.PreparationDate = data.PreparationDate;
+        order.BendingDate = data.BendingDate;
+        order.AssemblyDate = data.AssemblyDate;
+
+        _db.SaveChanges();
+        EndTimer();
     }
-    
 
     public void Delete(Order order)
     {
         StartTimer();
-            db.Remove(order);
-            db.SaveChanges();
+        _db.Remove(order);
+        _db.SaveChanges();
         EndTimer();
-        
     }
-    //faccio partire il timer 
-    public void StartTimer()
+
+    private void StartTimer()
     {
-        
-        sw.Start(); //parte il timer
-        
+        _sw.Start();
     }
-    //stoppo timer e ottengo risposta in millisecondi
-    public void EndTimer()
+
+    private void EndTimer()
     {
-        
-        sw.Stop(); //parte il timer
-        Console.WriteLine("Tempo passato {0}", sw.ElapsedMilliseconds);
-        
+        _sw.Stop();
+        Console.WriteLine("Tempo passato {0}", _sw.ElapsedMilliseconds);
     }
 }

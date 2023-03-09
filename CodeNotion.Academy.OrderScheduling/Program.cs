@@ -1,11 +1,7 @@
-using System.Configuration;
 using CodeNotion.Academy.OrderScheduling.Data;
 using CodeNotion.Academy.OrderScheduling.Models;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
-
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
