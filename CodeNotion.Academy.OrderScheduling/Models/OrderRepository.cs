@@ -45,14 +45,16 @@ public class OrderRepository : IOrderRepository
 
         _db.SaveChanges();
         EndTimer();
+        
     }
 
-    public void Delete(Order order)
+    public Order Delete(Order order)
     {
         StartTimer();
         _db.Remove(order);
         _db.SaveChanges();
         EndTimer();
+        return order;
     }
 
     private void StartTimer()

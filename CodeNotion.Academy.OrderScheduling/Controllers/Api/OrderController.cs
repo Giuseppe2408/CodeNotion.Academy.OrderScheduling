@@ -62,15 +62,15 @@ public class OrderController : ControllerBase
 
     [HttpDelete]
     [Route("[action]/{id:int}")]
-    public IActionResult Delete(int id)
+    public async Task<IActionResult> Delete(int id)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        var order = _orderRepository.GetById(id);
-        _orderRepository.Delete(order ?? throw new InvalidOperationException());
+        var model = new DeleteOrderCommand(id);
+        var result =  await _mediator.Send(model);
         return Ok();
     }
 }

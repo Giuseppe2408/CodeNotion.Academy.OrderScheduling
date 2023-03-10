@@ -9,5 +9,5 @@ public interface IOrderRepository
     public Order Create(Order order);
     public void Update(Order order, Order data);
     public Order? GetById(int id);
-    public void Delete(Order order);
+    public Order Delete(Order order);
 }
