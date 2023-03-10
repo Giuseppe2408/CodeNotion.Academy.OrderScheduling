@@ -48,16 +48,16 @@ public class OrderController : ControllerBase
 
     [HttpPut]
     [Route("[action]/{id:int}")]
-    public IActionResult Update(int id, Order data)
+    public async Task<IActionResult> Update(int id, Order data)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        var order = _orderRepository.GetById(id);
-        _orderRepository.Update(order ?? throw new InvalidOperationException(), data);
-        return Ok(order);
+        var model = new UpdateOrderCommand(id, data);
+        var result =  await _mediator.Send(model);
+        return Ok(result);
     }
 
     [HttpDelete]
@@ -71,6 +71,6 @@ public class OrderController : ControllerBase
 
         var model = new DeleteOrderCommand(id);
         var result =  await _mediator.Send(model);
-        return Ok();
+        return Ok("removed file");
     }
 }

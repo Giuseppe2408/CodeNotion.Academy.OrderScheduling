@@ -33,7 +33,7 @@ public class OrderRepository : IOrderRepository
         return order;
     }
 
-    public void Update(Order order, Order data)
+    public Order Update(Order order, Order data)
     {
         StartTimer();
         order.Customer = data.Customer;
@@ -42,10 +42,11 @@ public class OrderRepository : IOrderRepository
         order.PreparationDate = data.PreparationDate;
         order.BendingDate = data.BendingDate;
         order.AssemblyDate = data.AssemblyDate;
-
+        
         _db.SaveChanges();
         EndTimer();
         
+        return order ?? throw new ArgumentNullException(nameof(order));
     }
 
     public Order Delete(Order order)
