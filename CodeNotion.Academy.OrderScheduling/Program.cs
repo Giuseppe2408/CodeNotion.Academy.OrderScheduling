@@ -1,6 +1,6 @@
 using System.Reflection;
 using CodeNotion.Academy.OrderScheduling.Data;
-using CodeNotion.Academy.OrderScheduling.Models;
+using Timer = CodeNotion.Academy.OrderScheduling.Timer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +11,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<OrderDbContext>();
 
 // add dependencies injection
-builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<Timer>();
 //add mediatr
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 var app = builder.Build();
