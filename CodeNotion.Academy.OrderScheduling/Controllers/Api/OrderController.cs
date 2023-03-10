@@ -10,11 +10,9 @@ namespace CodeNotion.Academy.OrderScheduling.Controllers.Api;
 [ApiController]
 public class OrderController : ControllerBase
 {
-    private readonly IOrderRepository _orderRepository;
     private readonly IMediator _mediator;
-    public OrderController(IOrderRepository orderRepository, IMediator mediator)
+    public OrderController(IMediator mediator)
     {
-        _orderRepository = orderRepository;
         _mediator = mediator;
     }
 
@@ -70,7 +68,7 @@ public class OrderController : ControllerBase
         }
 
         var model = new DeleteOrderCommand(id);
-        var result =  await _mediator.Send(model);
+        await _mediator.Send(model);
         return Ok("removed file");
     }
 }

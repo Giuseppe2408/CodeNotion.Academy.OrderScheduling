@@ -15,6 +15,6 @@ public class UpdateOrderHandler : IRequestHandler<UpdateOrderCommand, Order>
     
     public Task<Order> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(_orderRepository.Update(_orderRepository.GetById(request.Id), request.Order));
+        return Task.FromResult(_orderRepository.Update(_orderRepository.GetById(request.Id) ?? throw new InvalidOperationException(), request.Order));
     }
 }
