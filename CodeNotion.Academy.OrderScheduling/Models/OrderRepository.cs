@@ -24,12 +24,13 @@ public class OrderRepository : IOrderRepository
 
     public Order? GetById(int id) => _db.Orders.FirstOrDefault(or => or.Id == id);
 
-    public void Create(Order order)
+    public Order Create(Order order)
     {
         StartTimer();
         _db.Orders.Add(order);
         _db.SaveChanges();
         EndTimer();
+        return order;
     }
 
     public void Update(Order order, Order data)

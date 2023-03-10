@@ -1,4 +1,5 @@
-﻿using CodeNotion.Academy.OrderScheduling.Models;
+﻿using CodeNotion.Academy.OrderScheduling.Commands;
+using CodeNotion.Academy.OrderScheduling.Models;
 using CodeNotion.Academy.OrderScheduling.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,7 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Create(Order order)
+    public async Task<IActionResult> Create([FromBody] Order order)
     {
         // assicurarsi che il model sia valid
         if (!ModelState.IsValid)
@@ -26,11 +27,9 @@ public class OrderController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        
-        
-        
-        _orderRepository.Create(order);
-        return Ok(order);
+        var model = new CreateOrderCommand(order);
+        var result = await _mediator.Send(model);
+        return Ok(result);
     }
 
     [HttpGet]
@@ -41,9 +40,9 @@ public class OrderController : ControllerBase
         {
             return BadRequest(ModelState);
         }
+        
         var query = new GetAllOrderQuery();
         var result =  await _mediator.Send(query);
-        
         return Ok(result);
     }
 

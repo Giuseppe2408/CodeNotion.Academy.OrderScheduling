@@ -30,8 +30,4 @@
       <Compile Remove="Controllers\Api\Create.cs" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Commands" />
-    </ItemGroup>
-
 </Project>
