@@ -12,6 +12,5 @@ public class UpdateOrderCommand : IRequest<Order>
         Id = id;
         Order = order;
     }
-
     
 }
