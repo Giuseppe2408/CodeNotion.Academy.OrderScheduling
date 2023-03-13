@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'order-scheduling-angular';
+  array = ["1","2","3"];
+  // list: Order[] = [];
+  // constructor(private orderClient: OrderClient) {
+  //   orderClient.list().subscribe(list => this.list = list)
+  // }
+
+  changeTitle() {
+    this.title = "Titolo 2";
+    this.array.push("4");
+  }
 }

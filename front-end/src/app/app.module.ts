@@ -8,9 +8,10 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule, //HttpClientModule
   ],
-  providers: [],
+  providers: [//{ provide: API_BASE_URL, useValue: "http://localhost:5181" }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
