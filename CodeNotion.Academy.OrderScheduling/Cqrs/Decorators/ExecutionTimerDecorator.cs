@@ -13,12 +13,12 @@ public class ExecutionTimerDecorator<TRequest, TResponse> : IPipelineBehavior<TR
         _timer = timer;
     }
 
-    public Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
         _timer.StartTimer();
 
-        var result = next.Invoke();
+        var result = await next.Invoke();
 
         _timer.EndTimer();
 

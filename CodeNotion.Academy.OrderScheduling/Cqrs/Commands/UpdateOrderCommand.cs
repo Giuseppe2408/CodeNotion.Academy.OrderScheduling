@@ -1,6 +1,7 @@
 ﻿using CodeNotion.Academy.OrderScheduling.Data;
 using CodeNotion.Academy.OrderScheduling.Models;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeNotion.Academy.OrderScheduling.Cqrs.Commands;
 
@@ -15,9 +16,9 @@ internal class UpdateOrderHandler : IRequestHandler<UpdateOrderCommand, Order>
         _db = db;
     }
 
-    public Task<Order> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
+    public async Task<Order> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
     {
-        var order = GetById(request.Id);
+        var order = await GetById(request.Id);
         if (order != null)
         {
             order.Customer = request.Order.Customer;
@@ -28,9 +29,9 @@ internal class UpdateOrderHandler : IRequestHandler<UpdateOrderCommand, Order>
             order.AssemblyDate = request.Order.AssemblyDate;
         }
 
-        _db.SaveChanges();
-        return Task.FromResult(order ?? throw new InvalidOperationException());
+        await _db.SaveChangesAsync(cancellationToken);
+        return order ?? throw new InvalidOperationException();
     }
 
-    private Order? GetById(int id) => _db.Orders.FirstOrDefault(or => or.Id == id);
+    private Task<Order?> GetById(int id) => _db.Orders.FirstOrDefaultAsync(or => or.Id == id);
 }

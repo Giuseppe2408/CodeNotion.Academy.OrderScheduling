@@ -1,10 +1,11 @@
 ﻿using CodeNotion.Academy.OrderScheduling.Data;
 using CodeNotion.Academy.OrderScheduling.Models;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeNotion.Academy.OrderScheduling.cqrs.Queries;
 
-public class GetAllOrderQuery : IRequest<List<Order>> {}
+public record GetAllOrderQuery : IRequest<List<Order>>;
 
 internal class GetAllOrdersHandler : IRequestHandler<GetAllOrderQuery, List<Order>>
 {
@@ -14,12 +15,10 @@ internal class GetAllOrdersHandler : IRequestHandler<GetAllOrderQuery, List<Orde
     {
         _db = db;
     }
-    
-    public Task<List<Order>> Handle(GetAllOrderQuery request, CancellationToken cancellationToken)
+
+    public async Task<List<Order>> Handle(GetAllOrderQuery request, CancellationToken cancellationToken)
     {
-        
-        var orders = _db.Orders.ToList();
-        
-        return Task.FromResult(orders);
+        var orders = await _db.Orders.ToListAsync(cancellationToken);
+        return orders;
     }
 }
