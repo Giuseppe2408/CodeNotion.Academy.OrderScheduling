@@ -2,7 +2,7 @@
 using CodeNotion.Academy.OrderScheduling.Models;
 using MediatR;
 
-namespace CodeNotion.Academy.OrderScheduling.Commands;
+namespace CodeNotion.Academy.OrderScheduling.Cqrs.Commands;
 
 public record CreateOrderCommand(Order Order) : IRequest<Order>;
 
@@ -10,20 +10,16 @@ internal class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, O
 {
     private readonly OrderDbContext _db;
     
-    private readonly Timer _sw;
-
-    public CreateOrderCommandHandler(OrderDbContext db, Timer sw)
+    public CreateOrderCommandHandler(OrderDbContext db)
     {
         _db = db;
-        _sw = sw;
     }
 
     public Task<Order> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
-        _sw.StartTimer();
         _db.Add(request.Order);
         _db.SaveChanges();
-        _sw.EndTimer();
+
         return Task.FromResult(request.Order);
     }
 }

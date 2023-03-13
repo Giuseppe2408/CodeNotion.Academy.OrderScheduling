@@ -2,24 +2,21 @@
 using CodeNotion.Academy.OrderScheduling.Models;
 using MediatR;
 
-namespace CodeNotion.Academy.OrderScheduling.Commands;
+namespace CodeNotion.Academy.OrderScheduling.Cqrs.Commands;
 
 public record UpdateOrderCommand(int Id, Order Order) : IRequest<Order>;
 
 internal class UpdateOrderHandler : IRequestHandler<UpdateOrderCommand, Order>
 {
     private readonly OrderDbContext _db;
-    private readonly Timer _sw;
 
-    public UpdateOrderHandler(OrderDbContext db, Timer sw)
+    public UpdateOrderHandler(OrderDbContext db)
     {
         _db = db;
-        _sw = sw;
     }
-    
+
     public Task<Order> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
     {
-        _sw.StartTimer();
         var order = GetById(request.Id);
         if (order != null)
         {
@@ -30,9 +27,10 @@ internal class UpdateOrderHandler : IRequestHandler<UpdateOrderCommand, Order>
             order.BendingDate = request.Order.BendingDate;
             order.AssemblyDate = request.Order.AssemblyDate;
         }
+
         _db.SaveChanges();
-        _sw.EndTimer();
         return Task.FromResult(order ?? throw new InvalidOperationException());
     }
+
     private Order? GetById(int id) => _db.Orders.FirstOrDefault(or => or.Id == id);
 }

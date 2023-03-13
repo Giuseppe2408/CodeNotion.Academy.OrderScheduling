@@ -1,6 +1,6 @@
-﻿using CodeNotion.Academy.OrderScheduling.Commands;
+﻿using CodeNotion.Academy.OrderScheduling.Cqrs.Commands;
+using CodeNotion.Academy.OrderScheduling.cqrs.Queries;
 using CodeNotion.Academy.OrderScheduling.Models;
-using CodeNotion.Academy.OrderScheduling.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,6 +11,7 @@ namespace CodeNotion.Academy.OrderScheduling.Controllers.Api;
 public class OrderController : ControllerBase
 {
     private readonly IMediator _mediator;
+
     public OrderController(IMediator mediator)
     {
         _mediator = mediator;
@@ -38,9 +39,9 @@ public class OrderController : ControllerBase
         {
             return BadRequest(ModelState);
         }
-        
+
         var query = new GetAllOrderQuery();
-        var result =  await _mediator.Send(query);
+        var result = await _mediator.Send(query);
         return Ok(result);
     }
 
@@ -54,7 +55,7 @@ public class OrderController : ControllerBase
         }
 
         var model = new UpdateOrderCommand(id, data);
-        var result =  await _mediator.Send(model);
+        var result = await _mediator.Send(model);
         return Ok(result);
     }
 

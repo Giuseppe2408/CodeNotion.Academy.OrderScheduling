@@ -1,6 +1,9 @@
 using System.Reflection;
+using CodeNotion.Academy.OrderScheduling.Cqrs.Decorators;
 using CodeNotion.Academy.OrderScheduling.Data;
-using Timer = CodeNotion.Academy.OrderScheduling.Timer;
+using MediatR;
+using Timer = CodeNotion.Academy.OrderScheduling.Cqrs.Decorators.Timer;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,11 +12,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<OrderDbContext>();
+//add dependency injection
+builder.Services.AddTransient<Timer>();
 
-// add dependencies injection
-builder.Services.AddScoped<Timer>();
 //add mediatr
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ExecutionTimerDecorator<,>));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
