@@ -12,5 +12,5 @@ export class AppComponent {
   constructor(private orderClient: OrderClient) {
     orderClient.list().subscribe((list: Order[]) => this.order_list = list)
   }
-
+  columnsToDisplay = ['id', 'customer', 'orderNumber', 'preparationDate', 'bendingDate', 'assemblyDate'];
 }
