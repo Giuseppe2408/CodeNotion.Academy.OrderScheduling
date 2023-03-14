@@ -45,7 +45,7 @@
       "contractResolverType": null,
       "serializerSettingsType": null,
       "useDocumentProvider": true,
-      "documentName": "Tecnirri Template Web API",
+      "documentName": "Order Scheduling Web API",
       "aspNetCoreEnvironment": null,
       "createWebHostBuilderMethod": null,
       "startupType": null,
@@ -74,7 +74,7 @@
       "injectionTokenType": "InjectionToken",
       "rxJsVersion": 7.0,
       "dateTimeType": "Date",
-      "nullValue": "Null",
+      "nullValue": "Undefined",
       "generateClientClasses": true,
       "generateClientInterfaces": true,
       "generateOptionalParameters": true,
@@ -92,7 +92,7 @@
       "useTransformResultMethod": false,
       "generateDtoTypes": true,
       "operationGenerationMode": "MultipleClientsFromOperationId",
-      "markOptionalProperties": false,
+      "markOptionalProperties": true,
       "generateCloneMethod": false,
       "typeStyle": "Interface",
       "enumStyle": "Enum",
@@ -121,7 +121,7 @@
       "enumNameGeneratorType": null,
       "serviceHost": null,
       "serviceSchemes": null,
-      "output": "../../front-end/src/app/core/services/api.service.ts",
+      "output": "../../front-end/src/app/api.service.ts",
       "newLineBehavior": "Auto"
     }
   }

@@ -8,19 +8,27 @@ using Timer = CodeNotion.Academy.OrderScheduling.Cqrs.Decorators.Timer;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Add services to the container.
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-//add dependency injection
-builder.Services.AddTransient<Timer>();
+// Dependency Injection
 builder.Services.AddDbContext<OrderDbContext>();
+builder.Services.AddTransient<Timer>();
 builder.Services.AddSwagger();
 builder.Services.AddNSwag();
 
-//add mediatr
+builder.Services.AddCors();
+// Mediator
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+
+// Decorators
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ExecutionTimerDecorator<,>));
+
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
 app.UseCors(b => b
@@ -30,8 +38,6 @@ app.UseCors(b => b
     .AllowAnyMethod());
 // Configure the HTTP request pipeline.
 app.UseApplicationSwagger();
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

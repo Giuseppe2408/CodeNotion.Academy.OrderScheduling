@@ -33,6 +33,7 @@ public class OrderController : ControllerBase
 
     [HttpGet]
     [Route("[action]")]
+    [ProducesResponseType(typeof(List<Order>), 200)]
     public async Task<IActionResult> List()
     {
         if (!ModelState.IsValid)
