@@ -1,3 +1,23 @@
-#margin-top {
-    margin-top: 100px;
+
+.font-size-big {
+    font-size: x-large;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    .list {
+        list-style-type: none;
+        background-color: rgb(79, 201, 238);
+        border-radius: 20px;
+        padding: 20px;
+        // li{
+        //     padding: 20px;
+        // }
+    }
 }

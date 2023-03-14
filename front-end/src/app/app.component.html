@@ -1,14 +1,14 @@
-<h1>{{title}}</h1>
-
-
-<ul  *ngFor="let order of order_list">
-  <li>
-    id : {{order.id}}
-  </li>
-  <li>
-    customer : {{order.customer}}
-  </li>
-  <li>
-    order number: {{order.orderNumber}}
-  </li>
-</ul>
+<h1 class="text-center">{{title}}</h1>
+<div class="container">
+  <ul class="list" *ngFor="let order of order_list">
+    <li class="font-size-big">
+      id: {{order.id}}
+    </li>
+    <li class="font-size-big">
+      customer: {{order.customer}}
+    </li>
+    <li class="font-size-big">
+      order number: {{order.orderNumber}}
+    </li>
+  </ul>
+</div>
