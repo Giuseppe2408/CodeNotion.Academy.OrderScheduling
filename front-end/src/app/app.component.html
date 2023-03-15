@@ -1,7 +1,26 @@
 <h1 class="text-center">{{title}}</h1>
+<div class="container">
+  <div>
+    <mat-form-field class="margin example-full-width">
+      <mat-label> Search customer </mat-label>
+      <input matInput class="input-style" [(ngModel)]="inputValueCustomer" placeholder="Customer name">
+    </mat-form-field>
+    <button (click)="applyFilterCustomer($event)" mat-button>search</button>
 
-<table mat-table [dataSource]="order_list">
-  
+  </div>
+
+  <div>
+    <mat-form-field class="margin example-full-width">
+      <mat-label>Search order number</mat-label>
+      <input matInput class="input-style" placeholder="Order number" [(ngModel)]="inputValueOrder">
+    </mat-form-field>
+    <button mat-raised-button (click)="applyFilterOrder($event)">Search order</button>
+  </div>
+</div>
+
+
+<table mat-table id="data-table" [dataSource]="filter_list">
+
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
   <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
 

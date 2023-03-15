@@ -34,14 +34,14 @@ public class OrderController : ControllerBase
     [HttpGet]
     [Route("[action]")]
     [ProducesResponseType(typeof(List<Order>), 200)]
-    public async Task<IActionResult> List()
+    public async Task<IActionResult> List([FromQuery]string? customer, [FromQuery]string? orderNumber)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-
-        var query = new GetAllOrderQuery();
+        
+        var query = new GetAllOrderQuery(customer, orderNumber);
         var result = await _mediator.Send(query);
         return Ok(result);
     }

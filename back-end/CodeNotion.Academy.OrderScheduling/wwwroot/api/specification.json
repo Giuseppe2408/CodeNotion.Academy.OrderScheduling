@@ -48,6 +48,24 @@
           "Order"
         ],
         "operationId": "Order_List",
+        "parameters": [
+          {
+            "name": "customer",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "orderNumber",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
