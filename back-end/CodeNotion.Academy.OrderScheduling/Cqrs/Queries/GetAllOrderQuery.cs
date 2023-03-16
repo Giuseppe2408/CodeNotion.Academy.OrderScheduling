@@ -18,13 +18,16 @@ internal class GetAllOrdersHandler : IRequestHandler<GetAllOrderQuery, List<Orde
 
     public async Task<List<Order>> Handle(GetAllOrderQuery request, CancellationToken cancellationToken)
     {
+        var orders = _db.Orders;
+
         if (request.Customer != null)
-            return new List<Order>(_db.Orders.ToList().Where(or => or.Customer == request.Customer));
+            return await orders.Where(order => order.Customer.ToLower().Contains(request.Customer.ToLower()))
+                .ToListAsync(cancellationToken: cancellationToken);
+
         if (request.OrderNumber != null)
-            return new List<Order>(_db.Orders.ToList().Where(or => or.OrderNumber == request.OrderNumber));
-        
-        
-        var orders = await _db.Orders.ToListAsync(cancellationToken);
-        return orders;
+            return await orders.Where(order => order.OrderNumber.ToLower().Contains(request.OrderNumber.ToLower()))
+                .ToListAsync(cancellationToken: cancellationToken);
+
+        return await orders.ToListAsync(cancellationToken);
     }
 }

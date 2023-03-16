@@ -24,9 +24,11 @@ export class AppComponent {
   applyFilterCustomer(event: Event) {
 
     this.httpClient.get("http://localhost:5181/api/Order/List", {
+
       params: {
         customer: this.inputValueCustomer
       },
+
     }).subscribe(res => {
 
       this.filter_list = Object.values(res)
@@ -39,14 +41,16 @@ export class AppComponent {
   applyFilterOrder(event: Event) {
 
     this.httpClient.get("http://localhost:5181/api/Order/List", {
+      
       params: {
         orderNumber: this.inputValueOrder
       },
+
     }).subscribe(res => {
 
       this.filter_list = Object.values(res)
       this.filter_list = this.order_list.filter(or => or.orderNumber?.includes(this.inputValueOrder));
-
+      
     })
 
   } 
