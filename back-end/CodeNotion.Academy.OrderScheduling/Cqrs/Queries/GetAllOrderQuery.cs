@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodeNotion.Academy.OrderScheduling.Cqrs.Queries;
 
-public record GetAllOrderQuery(string? Customer, string? OrderNumber) : IRequest<List<Order>>;
+public record GetAllOrderQuery(string? Customer, string? OrderNumber) : IRequest<Order[]>;
 
-internal class GetAllOrdersHandler : IRequestHandler<GetAllOrderQuery, List<Order>>
+internal class GetAllOrdersHandler : IRequestHandler<GetAllOrderQuery, Order[]>
 {
     private readonly OrderDbContext _db;
 
@@ -16,18 +16,19 @@ internal class GetAllOrdersHandler : IRequestHandler<GetAllOrderQuery, List<Orde
         _db = db;
     }
 
-    public async Task<List<Order>> Handle(GetAllOrderQuery request, CancellationToken cancellationToken)
+    public Task<Order[]> Handle(GetAllOrderQuery request, CancellationToken ct)
     {
-        var orders = _db.Orders;
+        var orders = _db.Orders.AsQueryable();
+        if (request.Customer is not null)
+        {
+            orders = orders.Where(order => order.Customer.ToLower().Contains(request.Customer.ToLower()));
+        }
 
-        if (request.Customer != null)
-            return await orders.Where(order => order.Customer.ToLower().Contains(request.Customer.ToLower()))
-                .ToListAsync(cancellationToken: cancellationToken);
+        if (request.OrderNumber is not null)
+        {
+            orders = orders.Where(order => order.OrderNumber.ToLower().Contains(request.OrderNumber.ToLower()));
+        }
 
-        if (request.OrderNumber != null)
-            return await orders.Where(order => order.OrderNumber.ToLower().Contains(request.OrderNumber.ToLower()))
-                .ToListAsync(cancellationToken: cancellationToken);
-
-        return await orders.ToListAsync(cancellationToken);
+        return orders.ToArrayAsync(ct);
     }
 }
