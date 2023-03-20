@@ -13,37 +13,15 @@
   </div>
 </div>
 
-<div>
-  <form method="post" (ngSubmit)="addOrder()">
-    <mat-form-field class="margin example-full-width">
-      <mat-label>Customer</mat-label>
-      <input [(ngModel)]="customer" name="customer" matInput placeholder="">
-    </mat-form-field>
-    <mat-form-field class="margin example-full-width">
-      <mat-label>Order Number</mat-label>
-      <input [(ngModel)]="orderNumber" name="orderNumber" matInput placeholder="">
-    </mat-form-field>
-    <mat-form-field class="margin example-full-width">
-      <mat-label>cutting Date</mat-label>
-      <input type="date" [(ngModel)]="cuttingDate" name="cuttingDate" matInput placeholder="">
-    </mat-form-field>
-    <mat-form-field class="margin example-full-width">
-      <mat-label>Preparation Date</mat-label>
-      <input type="date" [(ngModel)]="preparationDate" name="preparationDate" matInput placeholder="">
-    </mat-form-field>
-    <mat-form-field class="margin example-full-width">
-      <mat-label>Bending Date</mat-label>
-      <input type="date" [(ngModel)]="bendingDate" name="bendingDate" matInput placeholder="">
-    </mat-form-field>
-    <mat-form-field class="margin example-full-width">
-      <mat-label>assembly Date</mat-label>
-      <input type="date" [(ngModel)]="assemblyDate" name="assemblyDate" matInput placeholder="">
-    </mat-form-field>
-    <div class="button example-button-row">
-      <button color="accent" mat-raised-button type="submit">Create order</button>
-    </div>
-  </form>
-</div>
+<form [formGroup]="orderForm" (ngSubmit)="addOrder()">
+  <mat-form-field class="margin example-full-width" *ngFor="let input of columnsToDisplay.slice(1); let i = index">
+    <mat-label>{{input}}</mat-label>
+    <input [type]="inputType[i]" matInput formControlName="{{input}}" placeholder="">
+  </mat-form-field>
+  <div class="button example-button-row">
+    <button color="accent" mat-raised-button type="submit">Save</button>
+  </div>
+</form>
 
 <table mat-table id="data-table" [dataSource]="order$">
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>

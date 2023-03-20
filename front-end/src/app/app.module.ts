@@ -12,14 +12,14 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
-    BrowserModule, HttpClientModule, BrowserAnimationsModule, MatSlideToggleModule, MatTableModule, MatPaginatorModule, MatInputModule, MatButtonModule, MatFormFieldModule, FormsModule
+    BrowserModule, HttpClientModule, BrowserAnimationsModule, MatSlideToggleModule, MatTableModule, MatPaginatorModule, MatInputModule, MatButtonModule, MatFormFieldModule, FormsModule, ReactiveFormsModule
   ],
   providers: [{ provide: API_BASE_URL, useValue: "http://localhost:5181" }
   ],
