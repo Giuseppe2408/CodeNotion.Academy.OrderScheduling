@@ -6,7 +6,7 @@ namespace CodeNotion.Academy.OrderScheduling.Data;
 public class OrderDbContext : DbContext
 {
     public DbSet<Order> Orders { get; set; } = null!;
-    
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlServer(

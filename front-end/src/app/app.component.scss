@@ -12,12 +12,6 @@
     justify-content: center;
 }
 
-#formContainer {
-    width: 100%;
-    padding: 10px;
-    border-radius: 20px;
-}
-
 .margin {
     margin: 50px 50px;
 }
@@ -25,4 +19,8 @@
 .button {
     margin-left: 50px;
     margin-bottom: 50px;
+}
+
+.table-cell {
+    cursor: pointer;
 }

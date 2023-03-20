@@ -13,10 +13,15 @@
   </div>
 </div>
 
-<form [formGroup]="orderForm" (ngSubmit)="addOrder()">
-  <mat-form-field class="margin example-full-width" *ngFor="let input of columnsToDisplay.slice(1); let i = index">
+<form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="margin example-full-width" *ngFor="let input of columnsToDisplay.slice(1,3); let i = index">
     <mat-label>{{input}}</mat-label>
-    <input [type]="inputType[i]" matInput formControlName="{{input}}" placeholder="">
+    <input matInput type="text" formControlName="{{input}}">
+  </mat-form-field>
+  <mat-form-field class="margin example-full-width" *ngFor="let input of columnsToDisplay.slice(3); let i = index">
+    <mat-label>{{input}}</mat-label>
+    <input matInput [matDatepicker]="picker" type="date" formControlName="{{input}}" placeholder="">
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
   <div class="button example-button-row">
     <button color="accent" mat-raised-button type="submit">Save</button>
@@ -29,6 +34,6 @@
 
   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
     <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-    <td mat-cell *matCellDef="let order">{{order[column]}}</td>
+    <td mat-cell class="table-cell" *matCellDef="let order" (click)="formFill(order)">{{order[column]}}</td>
   </ng-container>
 </table>

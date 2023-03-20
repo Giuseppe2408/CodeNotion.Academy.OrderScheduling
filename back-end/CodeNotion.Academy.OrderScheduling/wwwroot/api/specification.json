@@ -189,22 +189,22 @@
           },
           "cuttingDate": {
             "type": "string",
-            "format": "date-time",
+            "format": "date",
             "nullable": true
           },
           "preparationDate": {
             "type": "string",
-            "format": "date-time",
+            "format": "date",
             "nullable": true
           },
           "bendingDate": {
             "type": "string",
-            "format": "date-time",
+            "format": "date",
             "nullable": true
           },
           "assemblyDate": {
             "type": "string",
-            "format": "date-time",
+            "format": "date",
             "nullable": true
           }
         }

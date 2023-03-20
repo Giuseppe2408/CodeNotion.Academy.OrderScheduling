@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeNotion.Academy.OrderScheduling.Migrations
 {
     [DbContext(typeof(OrderDbContext))]
-    [Migration("20230313153517_order_table")]
-    partial class order_table
+    [Migration("20230320151048_DateNullable")]
+    partial class DateNullable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,24 +33,24 @@ namespace CodeNotion.Academy.OrderScheduling.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("AssemblyDate")
+                    b.Property<DateTime?>("AssemblyDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("BendingDate")
+                    b.Property<DateTime?>("BendingDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Customer")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CuttingDate")
+                    b.Property<DateTime?>("CuttingDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("OrderNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("PreparationDate")
+                    b.Property<DateTime?>("PreparationDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
