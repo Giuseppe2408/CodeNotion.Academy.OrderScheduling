@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BehaviorSubject, combineLatest, debounceTime, Observable, Observer, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, debounceTime, switchMap } from 'rxjs';
 import { Order, OrderClient } from './api.service';
+import { serializeDateOnly } from './dateonly.utils';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,7 @@ import { Order, OrderClient } from './api.service';
 export class AppComponent {
   searchCustomer: string = "";
   searchOrder: string = "";
-  columnsToDisplay = ['id', 'customer', 'orderNumber', 'cuttingDate', 'preparationDate', 'bendingDate', 'assemblyDate'];
-  displayedColumns = ['customer', 'action']
+  columnsToDisplay = ['id', 'customer', 'orderNumber', 'cuttingDate', 'preparationDate', 'bendingDate', 'assemblyDate', 'action'];
   orderForm!: FormGroup;
   orderId!: number;
 
@@ -31,6 +31,7 @@ export class AppComponent {
 
   clearOrderForm() {
     this.orderForm = this.fb.group({
+      id: [0, Validators.required],
       customer: [null, Validators.required],
       orderNumber: [null, Validators.required],
       cuttingDate: [null],
@@ -46,6 +47,10 @@ export class AppComponent {
     }
 
     const payload = Object.assign({}, this.orderForm.getRawValue()) as Order;
+    payload.cuttingDate = serializeDateOnly(payload.cuttingDate);
+    payload.preparationDate = serializeDateOnly(payload.preparationDate);
+    payload.bendingDate = serializeDateOnly(payload.bendingDate);
+    payload.assemblyDate = serializeDateOnly(payload.assemblyDate);
     this.orderClient
       .create(payload)
       .subscribe(() => this.addOrder$.next(payload));
@@ -54,7 +59,7 @@ export class AppComponent {
   }
 
   formFill(order: Order) {
-    this.orderForm.setValue({ customer: order.customer, orderNumber: order.orderNumber, cuttingDate: order.cuttingDate, preparationDate: order.preparationDate, bendingDate: order.bendingDate, assemblyDate: order.assemblyDate })
+    this.orderForm.setValue({ ...order })
     this.orderId = order.id ?? 0;
   }
 
@@ -64,14 +69,22 @@ export class AppComponent {
     }
 
     const payload = Object.assign({}, this.orderForm.getRawValue()) as Order;
+    payload.cuttingDate = serializeDateOnly(payload.cuttingDate);
+    payload.preparationDate = serializeDateOnly(payload.preparationDate);
+    payload.bendingDate = serializeDateOnly(payload.bendingDate);
+    payload.assemblyDate = serializeDateOnly(payload.assemblyDate);
     this.orderClient
-      .update(this.orderId, payload)
+      .update(payload)
       .subscribe(() => this.updateOrder$.next(payload))
   }
 
-  deleteOrder(order : Order) {
+  deleteOrder(order: Order) {
+    if (!order?.id || order?.id === 0) {
+      return;
+    }
+
     this.orderClient
-      .delete(order.id ?? 0)
+      .delete(order.id)
       .subscribe(() => this.deleteOrder$.next(order))
   }
 
@@ -80,10 +93,11 @@ export class AppComponent {
       this.updateOrder()
       this.clearOrderForm()
       this.orderId = 0;
-    } else {
-      this.addOrder()
-      this.clearOrderForm()
+      return;
     }
+
+    this.addOrder()
+    this.clearOrderForm()
   }
 
   searchCustomerKeyUp() {

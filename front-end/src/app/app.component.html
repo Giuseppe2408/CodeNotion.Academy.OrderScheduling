@@ -14,28 +14,89 @@
 </div>
 
 <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
-  <mat-form-field class="margin example-full-width" *ngFor="let input of columnsToDisplay.slice(1,3); let i = index">
-    <mat-label>{{input}}</mat-label>
-    <input matInput type="text" formControlName="{{input}}">
+
+  <mat-form-field class="margin example-full-width">
+    <mat-label>customer</mat-label>
+    <input matInput type="text" formControlName="customer">
   </mat-form-field>
-  <mat-form-field class="margin example-full-width" *ngFor="let input of columnsToDisplay.slice(3); let i = index">
-    <mat-label>{{input}}</mat-label>
-    <input matInput [matDatepicker]="picker" type="date" formControlName="{{input}}" placeholder="">
-    <mat-datepicker #picker></mat-datepicker>
+
+  <mat-form-field class="margin example-full-width">
+    <mat-label>orderNumber</mat-label>
+    <input matInput type="text" formControlName="orderNumber">
   </mat-form-field>
+
+  <mat-form-field class="margin example-full-width">
+    <mat-label>cuttingDate</mat-label>
+    <input matInput [matDatepicker]="pickerCuttingDate" type="date" formControlName="cuttingDate">
+    <mat-datepicker #pickerCuttingDate></mat-datepicker>
+    <mat-datepicker-toggle matSuffix [for]="pickerCuttingDate"></mat-datepicker-toggle>
+  </mat-form-field>
+
+  <mat-form-field class="margin example-full-width">
+    <mat-label>preparationDate</mat-label>
+    <input matInput [matDatepicker]="pickerPreparationDate" type="date" formControlName="preparationDate">
+    <mat-datepicker #pickerPreparationDate></mat-datepicker>
+    <mat-datepicker-toggle matSuffix [for]="pickerPreparationDate"></mat-datepicker-toggle>
+  </mat-form-field>
+
+  <mat-form-field class="margin example-full-width">
+    <mat-label>bendingDate</mat-label>
+    <input matInput [matDatepicker]="pickerBendingDate" type="date" formControlName="bendingDate">
+    <mat-datepicker #pickerBendingDate></mat-datepicker>
+    <mat-datepicker-toggle matSuffix [for]="pickerBendingDate"></mat-datepicker-toggle>
+  </mat-form-field>
+
+  <mat-form-field class="margin example-full-width">
+    <mat-label>assemblyDate</mat-label>
+    <input matInput [matDatepicker]="pickerAssemblyDate" type="date" formControlName="assemblyDate">
+    <mat-datepicker #pickerAssemblyDate></mat-datepicker>
+    <mat-datepicker-toggle matSuffix [for]="pickerAssemblyDate"></mat-datepicker-toggle>
+  </mat-form-field>
+
   <div class="button example-button-row">
     <button color="accent" mat-raised-button type="submit">Save</button>
   </div>
 </form>
 
 <table mat-table id="data-table" [dataSource]="order$">
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay.concat('action')"></tr>
-  <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay.concat('action')"></tr>
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let order; columns: columnsToDisplay" (click)="formFill(order)"></tr>
 
-  <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-    <td mat-cell class="table-cell" *matCellDef="let order" (click)="formFill(order)">{{order[column]}}</td>
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> Id</th>
+    <td mat-cell class="table-cell" *matCellDef="let order">{{order.id}}</td>
   </ng-container>
+
+  <ng-container matColumnDef="customer">
+    <th mat-header-cell *matHeaderCellDef> customer</th>
+    <td mat-cell class="table-cell" *matCellDef="let order">{{order.customer}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="orderNumber">
+    <th mat-header-cell *matHeaderCellDef> orderNumber</th>
+    <td mat-cell class="table-cell" *matCellDef="let order">{{order.orderNumber}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="cuttingDate">
+    <th mat-header-cell *matHeaderCellDef> cuttingDate</th>
+    <td mat-cell class="table-cell" *matCellDef="let order">{{order.cuttingDate | date}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="preparationDate">
+    <th mat-header-cell *matHeaderCellDef> preparationDate</th>
+    <td mat-cell class="table-cell" *matCellDef="let order">{{order.preparationDate | date}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="bendingDate">
+    <th mat-header-cell *matHeaderCellDef> bendingDate</th>
+    <td mat-cell class="table-cell" *matCellDef="let order">{{order.bendingDate | date}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="assemblyDate">
+    <th mat-header-cell *matHeaderCellDef> assemblyDate</th>
+    <td mat-cell class="table-cell" *matCellDef="let order">{{order.assemblyDate | date}}</td>
+  </ng-container>
+
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef> action </th>
     <td mat-cell class="table-cell" *matCellDef="let order">

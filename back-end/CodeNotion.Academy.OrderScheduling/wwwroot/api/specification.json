@@ -40,6 +40,36 @@
             "description": "Success"
           }
         }
+      },
+      "put": {
+        "tags": [
+          "Order"
+        ],
+        "operationId": "Order_Update",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
       }
     },
     "/api/Order/List": {
@@ -99,50 +129,6 @@
         }
       }
     },
-    "/api/Order/Update/{id}": {
-      "put": {
-        "tags": [
-          "Order"
-        ],
-        "operationId": "Order_Update",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "style": "simple",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Order"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Order"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/Order"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
     "/api/Order/Delete/{id}": {
       "delete": {
         "tags": [
@@ -189,23 +175,23 @@
           },
           "cuttingDate": {
             "type": "string",
-            "format": "date",
-            "nullable": true
+            "nullable": true,
+            "example": "yyyy-MM-dd"
           },
           "preparationDate": {
             "type": "string",
-            "format": "date",
-            "nullable": true
+            "nullable": true,
+            "example": "yyyy-MM-dd"
           },
           "bendingDate": {
             "type": "string",
-            "format": "date",
-            "nullable": true
+            "nullable": true,
+            "example": "yyyy-MM-dd"
           },
           "assemblyDate": {
             "type": "string",
-            "format": "date",
-            "nullable": true
+            "nullable": true,
+            "example": "yyyy-MM-dd"
           }
         }
       }

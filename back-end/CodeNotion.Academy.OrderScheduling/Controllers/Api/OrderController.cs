@@ -47,15 +47,14 @@ public class OrderController : ControllerBase
     }
 
     [HttpPut]
-    [Route("[action]/{id:int}")]
-    public async Task<IActionResult> Update(int id, Order data)
+    public async Task<IActionResult> Update([FromBody]Order data)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
 
-        var model = new UpdateOrderCommand(id, data);
+        var model = new UpdateOrderCommand(data);
         var result = await _mediator.Send(model);
         return Ok(result);
     }
