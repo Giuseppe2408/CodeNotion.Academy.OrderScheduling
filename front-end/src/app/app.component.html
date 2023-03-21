@@ -13,54 +13,11 @@
   </div>
 </div>
 
-<form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
-
-  <mat-form-field class="margin example-full-width">
-    <mat-label>customer</mat-label>
-    <input matInput type="text" formControlName="customer">
-  </mat-form-field>
-
-  <mat-form-field class="margin example-full-width">
-    <mat-label>orderNumber</mat-label>
-    <input matInput type="text" formControlName="orderNumber">
-  </mat-form-field>
-
-  <mat-form-field class="margin example-full-width">
-    <mat-label>cuttingDate</mat-label>
-    <input matInput [matDatepicker]="pickerCuttingDate" type="date" formControlName="cuttingDate">
-    <mat-datepicker #pickerCuttingDate></mat-datepicker>
-    <mat-datepicker-toggle matSuffix [for]="pickerCuttingDate"></mat-datepicker-toggle>
-  </mat-form-field>
-
-  <mat-form-field class="margin example-full-width">
-    <mat-label>preparationDate</mat-label>
-    <input matInput [matDatepicker]="pickerPreparationDate" type="date" formControlName="preparationDate">
-    <mat-datepicker #pickerPreparationDate></mat-datepicker>
-    <mat-datepicker-toggle matSuffix [for]="pickerPreparationDate"></mat-datepicker-toggle>
-  </mat-form-field>
-
-  <mat-form-field class="margin example-full-width">
-    <mat-label>bendingDate</mat-label>
-    <input matInput [matDatepicker]="pickerBendingDate" type="date" formControlName="bendingDate">
-    <mat-datepicker #pickerBendingDate></mat-datepicker>
-    <mat-datepicker-toggle matSuffix [for]="pickerBendingDate"></mat-datepicker-toggle>
-  </mat-form-field>
-
-  <mat-form-field class="margin example-full-width">
-    <mat-label>assemblyDate</mat-label>
-    <input matInput [matDatepicker]="pickerAssemblyDate" type="date" formControlName="assemblyDate">
-    <mat-datepicker #pickerAssemblyDate></mat-datepicker>
-    <mat-datepicker-toggle matSuffix [for]="pickerAssemblyDate"></mat-datepicker-toggle>
-  </mat-form-field>
-
-  <div class="button example-button-row">
-    <button color="accent" mat-raised-button type="submit">Save</button>
-  </div>
-</form>
+<app-order-form [updateOrder$]="updateOrder$" [addOrder$]="addOrder$"></app-order-form>
 
 <table mat-table id="data-table" [dataSource]="order$">
   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let order; columns: columnsToDisplay" (click)="formFill(order)"></tr>
+  <tr mat-row *matRowDef="let order; columns: columnsToDisplay" (click)="triggerChildFunction(order)"></tr>
 
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> Id</th>
@@ -105,4 +62,5 @@
       </button>
     </td>
   </ng-container>
+
 </table>
