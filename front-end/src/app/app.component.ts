@@ -12,13 +12,15 @@ export class AppComponent {
   searchCustomer: string = "";
   searchOrder: string = "";
   columnsToDisplay = ['id', 'customer', 'orderNumber', 'cuttingDate', 'preparationDate', 'bendingDate', 'assemblyDate'];
+  displayedColumns = ['customer', 'action']
   orderForm!: FormGroup;
   orderId!: number;
 
   searchFilter$ = new BehaviorSubject<{ customer?: string; orderNumber?: string }>({});
   addOrder$ = new BehaviorSubject<Order | null>(null);
   updateOrder$ = new BehaviorSubject<Order | null>(null);
-  order$ = combineLatest([this.searchFilter$, this.addOrder$, this.updateOrder$]).pipe(
+  deleteOrder$ = new BehaviorSubject<Order | null>(null);
+  order$ = combineLatest([this.searchFilter$, this.addOrder$, this.updateOrder$, this.deleteOrder$]).pipe(
     debounceTime(200),
     switchMap(([filter]) => this.orderClient.list(filter.customer, filter.orderNumber))
   )
@@ -65,6 +67,12 @@ export class AppComponent {
     this.orderClient
       .update(this.orderId, payload)
       .subscribe(() => this.updateOrder$.next(payload))
+  }
+
+  deleteOrder(order : Order) {
+    this.orderClient
+      .delete(order.id ?? 0)
+      .subscribe(() => this.deleteOrder$.next(order))
   }
 
   onSubmit() {

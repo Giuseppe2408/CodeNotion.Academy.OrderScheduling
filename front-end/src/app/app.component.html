@@ -29,11 +29,19 @@
 </form>
 
 <table mat-table id="data-table" [dataSource]="order$">
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></tr>
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay.concat('action')"></tr>
+  <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay.concat('action')"></tr>
 
   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
     <th mat-header-cell *matHeaderCellDef> {{column}} </th>
     <td mat-cell class="table-cell" *matCellDef="let order" (click)="formFill(order)">{{order[column]}}</td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> action </th>
+    <td mat-cell class="table-cell" *matCellDef="let order">
+      <button class="transparent">
+        <mat-icon (click)="deleteOrder(order)">delete</mat-icon>
+      </button>
+    </td>
   </ng-container>
 </table>
