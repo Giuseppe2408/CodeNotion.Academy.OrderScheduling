@@ -29,14 +29,16 @@ export class AppComponent {
     this.childComponent.getOrder(row);
   }
 
-  deleteOrder(order: Order) {
+  deleteOrder(event : Event, order: Order) {
     if (!order?.id || order?.id === 0) {
       return;
     }
-
+    event.stopPropagation();
     this.orderClient
       .delete(order.id)
       .subscribe(() => this.deleteOrder$.next(order))
+    
+    this.childComponent.clearOrderForm();
   }
 
   searchCustomerKeyUp() {

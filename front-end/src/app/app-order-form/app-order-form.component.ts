@@ -11,15 +11,15 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./app-order-form.component.scss']
 })
 export class AppOrderFormComponent {
-  @Input() order! : Order;
+  @Input() order!: Order;
   @Input() updateOrder$ = new BehaviorSubject<Order | null>(null);
   @Input() addOrder$ = new BehaviorSubject<Order | null>(null);
 
-  constructor(private fb : FormBuilder,private orderClient: OrderClient) {
+  orderForm!: FormGroup;
+
+  constructor(private fb: FormBuilder, private orderClient: OrderClient) {
     this.clearOrderForm();
   }
-
-  orderForm! : FormGroup;
 
   clearOrderForm() {
     this.orderForm = this.fb.group({
@@ -37,6 +37,7 @@ export class AppOrderFormComponent {
     if (!order.id) {
       return
     }
+
     this.orderForm.setValue({ ...order })
   }
 
@@ -53,8 +54,8 @@ export class AppOrderFormComponent {
         return;
       }
       this.orderClient
-      .update(payload)
-      .subscribe(() => this.updateOrder$.next(payload))
+        .update(payload)
+        .subscribe(() => this.updateOrder$.next(payload))
       this.clearOrderForm();
       return;
     }
