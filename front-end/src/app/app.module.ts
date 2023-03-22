@@ -18,12 +18,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AppOrderFormComponent } from './app-order-form/app-order-form.component';
+import { AppOrderTableComponent } from './app-order-table/app-order-table.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AppOrderFormComponent,
+    AppOrderTableComponent,
   ],
   imports: [
     BrowserModule, HttpClientModule, BrowserAnimationsModule, MatSlideToggleModule, MatTableModule, MatPaginatorModule, MatInputModule, MatButtonModule, MatFormFieldModule, FormsModule, ReactiveFormsModule, MatDatepickerModule, MatNativeDateModule, MatNativeDateModule, MatIconModule

@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.margin {
+    margin: 50px 50px;
+}
+
+.transparent {
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+.table-cell {
+    cursor: pointer;
+}
