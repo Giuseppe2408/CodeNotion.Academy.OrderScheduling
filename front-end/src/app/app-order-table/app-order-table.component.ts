@@ -10,8 +10,8 @@ import { Order, OrderClient } from '../api.service';
 })
 export class AppOrderTableComponent {
   @Input() focusedOrder!: BehaviorSubject<Order | null>;
-  @Input() addOrder$!: BehaviorSubject<Order | null>
-  @Input() updateOrder$!: BehaviorSubject<Order | null>
+  @Input() addOrder$!: BehaviorSubject<Order | null>;
+  @Input() updateOrder$!: BehaviorSubject<Order | null>;
 
   deleteOrder$ = new BehaviorSubject<Order | null>(null);
   searchCustomer: string = "";

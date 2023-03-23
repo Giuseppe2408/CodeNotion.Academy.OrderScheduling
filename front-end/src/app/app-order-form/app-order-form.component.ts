@@ -14,7 +14,6 @@ export class AppOrderFormComponent {
   @Input() order!: Subject<Order | null>;
   @Input() addOrder$ = new BehaviorSubject<Order | null>(null);
   @Input() updateOrder$ = new BehaviorSubject<Order | null>(null);
-  // @Output() onOrderUpdated = new EventEmitter<Order>();
   orderForm: Observable<FormGroup | null> | null = null;
 
   constructor(private fb: FormBuilder, private orderClient: OrderClient) {
