@@ -8,10 +8,16 @@ public class OrderDbContext : DbContext
 {
     public DbSet<Order> Orders { get; set; } = null!;
 
+    public OrderDbContext(DbContextOptions<OrderDbContext> options) : base(options)
+    {
+    }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        var builder = WebApplication.CreateBuilder();
+        var connectionString = builder.Configuration.GetConnectionString("MyConnectionString");
         optionsBuilder.UseSqlServer(
-            "data source=a6584a657b52;initial catalog=db_orderscheduling;user id=sa;password=yourStrong(!)Password;TrustServerCertificate=True;");
+            connectionString);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

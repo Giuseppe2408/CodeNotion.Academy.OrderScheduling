@@ -19,10 +19,10 @@ internal class DeleteOrderHandler : IRequestHandler<DeleteOrderCommand, Order>
     public async Task<Order> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
     {
         var order = await GetById(request.Id);
-
-        if (order != null) _db.Orders.Remove(order);
+        _db.Orders.Remove(order ?? throw new InvalidOperationException());
         await _db.SaveChangesAsync(cancellationToken);
-        return order!;
+
+        return order;
     }
 
     private Task<Order?> GetById(int id) => _db.Orders.FirstOrDefaultAsync(or => or.Id == id);

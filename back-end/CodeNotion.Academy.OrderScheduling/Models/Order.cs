@@ -13,4 +13,5 @@ public class Order
     public DateOnly? PreparationDate { get; set; }
     public DateOnly? BendingDate { get; set; }
     public DateOnly? AssemblyDate { get; set; }
+    
 }

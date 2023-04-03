@@ -7,20 +7,25 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CodeNotion.Academy.OrderScheduling.Tests;
 
-public class OrderTests
+public class OrderTests : IClassFixture<OrderApiFactory>, IAsyncLifetime
 {
     private readonly IServiceProvider _provider;
-    private readonly IMediator _mediator;
+    private readonly IMediator _mediator; 
+    private readonly OrderApiFactory _orderTestBase;
+    private readonly Func<Task> _resetDatabase;
 
-    public OrderTests()
+    public OrderTests(OrderApiFactory factory)
     {
         var services = new ServiceCollection();
         services.AddDbContext<OrderDbContext>();
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
         _provider = services.BuildServiceProvider().CreateScope().ServiceProvider;
         _mediator = _provider.GetRequiredService<IMediator>();
+        _orderTestBase = factory;
+        var scope = factory.Services.CreateScope();
+        _resetDatabase = factory.ResetDatabaseAsync;
     }
-
+    
     [Fact]
     public async Task Should_CreateOrder_When_OrderIsCorrect()
     {
@@ -33,7 +38,7 @@ public class OrderTests
 
         // Act
         var result = await _mediator.Send(new CreateOrderCommand(order));
-
+        
         // Assert
         Assert.NotNull(result);
         Assert.True(result.Id > 0);
@@ -133,4 +138,7 @@ public class OrderTests
         // Assert
         await Assert.ThrowsAsync<InvalidOperationException>(UpdateOrder);
     }
+
+    public Task InitializeAsync() => Task.CompletedTask;
+    public Task DisposeAsync() => _resetDatabase();
 }

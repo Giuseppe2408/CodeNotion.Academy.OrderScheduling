@@ -1,19 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=1313e940_002D534c_002D4797_002Dae92_002D6c92c46e0a39/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Should_DeleteOrder_When_OrderExists" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::76FE5307-CF0B-4C3A-A3EF-45286B70BFFB::net7.0::CodeNotion.Academy.OrderScheduling.Tests.OrderTests.Should_DeleteOrder_When_OrderExists&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::76FE5307-CF0B-4C3A-A3EF-45286B70BFFB::net7.0::CodeNotion.Academy.OrderScheduling.Tests.OrderTests.Should_CreateOrder_When_OrderIsCorrect&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::76FE5307-CF0B-4C3A-A3EF-45286B70BFFB::net7.0::CodeNotion.Academy.OrderScheduling.Tests.OrderTests.Should_NotThrowError_When_DeletingNonExistingOrder&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::76FE5307-CF0B-4C3A-A3EF-45286B70BFFB::net7.0::CodeNotion.Academy.OrderScheduling.Tests.OrderTests.Should_UpdateOrder_When_OrderIsCorrect&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::76FE5307-CF0B-4C3A-A3EF-45286B70BFFB::net7.0::CodeNotion.Academy.OrderScheduling.Tests.OrderTests.Should_ThrowError_When_UpdatingNonExistingOrder&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+  &lt;Project Location="C:\Users\peppe\RiderProjects\CodeNotion.Academy.OrderScheduling-master\back-end\CodeNotion.Academy.OrderScheduling.Tests" Presentation="&amp;lt;CodeNotion.Academy.OrderScheduling.Tests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=60f33a53_002Decbd_002D4e64_002Db8a8_002De174d6513b13/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Should_ThrowError_When_UpdatingNonExistingOrder" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::76FE5307-CF0B-4C3A-A3EF-45286B70BFFB::net7.0::CodeNotion.Academy.OrderScheduling.Tests.OrderTests.Should_ThrowError_When_UpdatingNonExistingOrder&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::76FE5307-CF0B-4C3A-A3EF-45286B70BFFB::net7.0::CodeNotion.Academy.OrderScheduling.Tests.OrderTests.Should_NotThrowError_When_DeletingNonExistingOrder&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::76FE5307-CF0B-4C3A-A3EF-45286B70BFFB::net7.0::CodeNotion.Academy.OrderScheduling.Tests.OrderTests.Should_DeleteOrder_When_OrderExists&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::76FE5307-CF0B-4C3A-A3EF-45286B70BFFB::net7.0::CodeNotion.Academy.OrderScheduling.Tests.OrderTests.Should_UpdateOrder_When_OrderIsCorrect&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::76FE5307-CF0B-4C3A-A3EF-45286B70BFFB::net7.0::CodeNotion.Academy.OrderScheduling.Tests.OrderTests.Should_CreateOrder_When_OrderIsCorrect&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+  &lt;Project Location="C:\Users\peppe\RiderProjects\CodeNotion.Academy.OrderScheduling-master\back-end\CodeNotion.Academy.OrderScheduling.Tests" Presentation="&amp;lt;CodeNotion.Academy.OrderScheduling.Tests&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
